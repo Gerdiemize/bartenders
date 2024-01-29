@@ -79,6 +79,7 @@ flutter:
     - assets/images/dashboardHomeImage.png
     - assets/images/teamImage.png
     - assets/images/girlSearchResult.png
+    - assets/images/membership.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

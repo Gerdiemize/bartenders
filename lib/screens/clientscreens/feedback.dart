@@ -1,51 +1,68 @@
 import 'package:flutter/material.dart';
 
-class TermsConditionsStaffScreen extends StatelessWidget {
+class FeedbackClientScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text('Terms and Conditions', style: TextStyle(color: Colors.white),),
-        centerTitle: true,
+        title: Text('Feedback'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              // Handle skip action
+            },
+            child: Text(
+              'Skip',
+              style: TextStyle(color: Colors.white),
+            ),
+          )
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              'Last updated December 2023',
-              style: TextStyle(color: Colors.white, fontSize: 14),
-              textAlign: TextAlign.center,
+              'Public feedback',
+              style: TextStyle(color: Colors.white, fontSize: 18),
             ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(height: 20),
-                    Text(
-                      '1. Terms',
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout',
-                      style: TextStyle(color: Colors.white, fontSize: 14),
-                    ),
-                    SizedBox(height: 20),
-                    Text(
-                      '2. User License',
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout',
-                      style: TextStyle(color: Colors.white, fontSize: 14),
-                    ),
-                    // Repeat the pattern for other sections
-                  ],
+            SizedBox(height: 8,),
+            Text(
+              'This feedback will be shared on Bartender profile',
+              style: TextStyle(color: Colors.grey),
+            ),
+            SizedBox(height: 20),
+            FeedbackCategory(title: 'Skills'),
+            FeedbackCategory(title: 'Communications'),
+            FeedbackCategory(title: 'Cooperations',),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  'Total Score: ',
+                  style: TextStyle(color: Colors.grey, fontSize: 16),
+                ),
+                Text(
+                  '4.00',
+                  style: TextStyle(color: Colors.white, fontSize: 18),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Share your experience with this talent',
+              style: TextStyle(color: Colors.grey, fontSize: 16),
+            ),
+            SizedBox(height: 10),
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Write here',
+                hintStyle: TextStyle(color: Colors.grey),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey),
                 ),
               ),
             ),
@@ -104,7 +121,7 @@ class TermsConditionsStaffScreen extends StatelessWidget {
                       ),
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/membershipStaff');
+                          Navigator.pushNamed(context, '/homeClient');
                         },
                         child: Text(
                           'Accept',
@@ -128,10 +145,76 @@ class TermsConditionsStaffScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 20), // Add some spacing at the bottom
           ],
         ),
+      ),
+      backgroundColor: Colors.black, // Set the background color
+    );
+  }
+}
+
+class FeedbackCategory extends StatefulWidget {
+  final String title;
+
+  const FeedbackCategory({
+    Key? key,
+    required this.title,
+  }) : super(key: key);
+
+  @override
+  _FeedbackCategoryState createState() => _FeedbackCategoryState();
+}
+
+class _FeedbackCategoryState extends State<FeedbackCategory> {
+  int rating = 0; // Initial rating is 0
+
+  @override
+  Widget build(BuildContext context) {
+    // Define the gradient colors for the stars
+    final Shader starGradient = LinearGradient(
+      colors: <Color>[Color(0xFF825B33), Color(0xFFE8DABF),Color(0xFF825B33)],
+    ).createShader(Rect.fromLTWH(0.0, 0.0, 200.0, 70.0));
+
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            widget.title,
+            style: TextStyle(color: Colors.white),
+          ),
+          SizedBox(height: 4,),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: List.generate(5, (index) {
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    rating = index + 1;
+                  });
+                },
+                child: ShaderMask(
+                  blendMode: BlendMode.srcIn,
+                  shaderCallback: (Rect bounds) {
+                    return LinearGradient(
+                      colors: [Color(0xFF825B33), Color(0xFFE8DABF),Color(0xFF825B33)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ).createShader(bounds);
+                  },
+                  child: Icon(
+                    index < rating ? Icons.star : Icons.star_border,
+                    color: index < rating ? null : Colors.grey,
+                    size: 36,
+                  ),
+                ),
+              );
+            }),
+          ),
+        ],
       ),
     );
   }
 }
+
