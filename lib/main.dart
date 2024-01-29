@@ -1,9 +1,15 @@
 import 'package:bartenders_and_more/screens/clientscreens/confirmPartyDetails.dart';
+import 'package:bartenders_and_more/screens/clientscreens/currentEventsDetails.dart';
 import 'package:bartenders_and_more/screens/clientscreens/dashboardCL.dart';
+import 'package:bartenders_and_more/screens/clientscreens/feedback.dart';
 import 'package:bartenders_and_more/screens/clientscreens/partyDetails.dart';
 import 'package:bartenders_and_more/screens/clientscreens/planner.dart';
 import 'package:bartenders_and_more/screens/clientscreens/profileHire.dart';
 import 'package:bartenders_and_more/screens/clientscreens/searchResults.dart';
+import 'package:bartenders_and_more/screens/staffscreens/apply.dart';
+import 'package:bartenders_and_more/screens/staffscreens/dashboardstaff.dart';
+import 'package:bartenders_and_more/screens/staffscreens/eventapplydetails.dart';
+import 'package:bartenders_and_more/screens/staffscreens/eventsearchresult.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:bartenders_and_more/screens/staffsignup/verifyemailstaff.dart';
@@ -28,6 +34,7 @@ import 'package:bartenders_and_more/screens/clientscreens/homeclient.dart';
 import 'package:bartenders_and_more/screens/staffsignup/termsstaff.dart';
 import 'package:bartenders_and_more/screens/clientscreens/partyDetails.dart';
 import 'package:bartenders_and_more/screens/clientscreens/confirmPartyDetails.dart';
+import 'package:bartenders_and_more/screens/staffscreens/membership.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -67,7 +74,15 @@ class MyApp extends StatelessWidget {
         '/dashboardClient' : (context) => DashboardClient(),
         '/searchResults' : (context) => SearchResults(),
         '/profileHire' :(context) => ProfileHireScreen(),
-        '/planner':(context) => PlannerScreen()
+        '/planner':(context) => PlannerScreen(),
+        '/feedback':(context) => FeedbackClientScreen(),
+        '/currentEventDetails':(context) => CurrentEventDetails(),
+        // Staff Screens
+        '/membershipStaff':(context) => MembershipScreen(),
+        '/dashboardStaff':(context) => DashboardStaff(),
+        '/eventSearchResults':(context) => EventSearchResults(),
+        '/eventApplyDetails':(context) => EventDetailsStaff(),
+        '/applyStaff':(context) => ApplyStaff()
       },
     );
   }

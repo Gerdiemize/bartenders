@@ -4,6 +4,107 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 
 class SignUpStaffScreen extends StatelessWidget {
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  void joinNowButtonPressed(BuildContext context) {
+    // Get user input from controllers
+    String firstName = firstNameController.text;
+    String lastName = lastNameController.text;
+    String email = emailController.text;
+    String password = passwordController.text;
+
+    if (firstName.isNotEmpty){
+      if (lastName.isNotEmpty){
+        if (isValidEmail(email)){
+          if (isPasswordComplex(password)){
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+              content: Text("Welcome to Bartenders $firstName."),
+              ),
+            );
+            Navigator.pushNamed(context, '/emailVerificationStaff');
+          }else{
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+              content: Text("Password does not accomplish the requirements."),
+              ),
+            );
+          }
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+            content: Text("Email is invalid."),
+            ),
+          );
+        }
+      }else{
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+          content: Text("Lastname is empty."),
+          ),
+        );
+      }
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+        content: Text("Firstname is empty."),
+        ),
+      );
+    }
+    
+  }
+
+  bool isPasswordComplex(String password) {
+    // Minimum length requirement
+    if (password.length < 8) {
+      print("Password must be at least 8 characters long.");
+      return false;
+    }
+
+    // Check for uppercase letters
+    if (!password.contains(RegExp(r'[A-Z]'))) {
+      print("Password must contain at least one uppercase letter.");
+      return false;
+    }
+
+    // Check for lowercase letters
+    if (!password.contains(RegExp(r'[a-z]'))) {
+      print("Password must contain at least one lowercase letter.");
+      return false;
+    }
+
+    // Check for numbers
+    if (!password.contains(RegExp(r'[0-9]'))) {
+      print("Password must contain at least one number.");
+      return false;
+    }
+
+    // Check for special characters
+    if (!password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+      print("Password must contain at least one special character.");
+      return false;
+    }
+
+    // If all criteria are met, the password is considered complex
+    return true;
+  }
+
+  bool isValidEmail(String email) {
+    // Regular expression for a basic email validation
+    final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+
+    return emailRegex.hasMatch(email);
+  }
+  @override
+  void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,6 +142,7 @@ class SignUpStaffScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         TextField(
+                          controller: firstNameController,
                           style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                             hintText: 'Enter your first name',
@@ -67,6 +169,7 @@ class SignUpStaffScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         TextField(
+                          controller: lastNameController,
                           style: TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                             hintText: 'Enter your last name',
@@ -91,6 +194,7 @@ class SignUpStaffScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               TextField(
+                controller:  emailController,
                 style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   hintText: 'Enter your email',
@@ -110,6 +214,7 @@ class SignUpStaffScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               TextField(
+                controller: passwordController,
                 obscureText: true,
                 style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
@@ -142,7 +247,7 @@ class SignUpStaffScreen extends StatelessWidget {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/emailVerificationStaff');
+                    joinNowButtonPressed(context);
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min, // Use only the minimum space needed

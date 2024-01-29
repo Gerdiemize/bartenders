@@ -1,7 +1,26 @@
 import 'package:flutter/material.dart';
 
 class LocationScreen extends StatelessWidget {
+  final TextEditingController locationController = TextEditingController();
+
+  void continueButtonPressed(BuildContext context) {
+    // Get user input from controllers
+
+    String location = locationController.text;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+      content: Text(location),
+      ),
+    );
+
+    Navigator.pushNamed(context, '/signupClient'); 
+  }
+  
   @override
+  void dispose() {
+    locationController.dispose();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
@@ -31,6 +50,7 @@ class LocationScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               TextField(
+                controller: locationController,
                 style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
                   hintText: 'Enter your location here',
@@ -67,7 +87,7 @@ class LocationScreen extends StatelessWidget {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/signupClient'); 
+                    continueButtonPressed(context);
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min, // Use only the minimum space needed

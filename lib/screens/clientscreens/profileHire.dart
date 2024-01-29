@@ -174,7 +174,7 @@ class _ProfileHireScreenState extends State<ProfileHireScreen> {
                             ),
                             child: ElevatedButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/planner');
+                                Navigator.pushNamed(context, '/currentEventDetails');
                               },
                               child: Row(
                                 mainAxisSize: MainAxisSize.min, // Use only the minimum space needed

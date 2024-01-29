@@ -19,6 +19,7 @@ class EventCard extends StatelessWidget {
       margin: EdgeInsets.all(8.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
+        side: BorderSide(color: Colors.grey, width: 1.0),
       ),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -31,7 +32,7 @@ class EventCard extends StatelessWidget {
               overflow: TextOverflow.ellipsis, // Show ellipsis when text overflows
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 18.0,
+                fontSize: 16.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -47,7 +48,7 @@ class EventCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis, // Show ellipsis when text overflows
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 14.0,
+                      fontSize: 12.0,
                     ),
                   ),
                 ),
@@ -65,7 +66,7 @@ class EventCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis, // Show ellipsis when text overflows
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 14.0,
+                      fontSize: 12.0,
                     ),
                   ),
                 ),

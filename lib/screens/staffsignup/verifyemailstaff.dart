@@ -1,6 +1,26 @@
 import 'package:flutter/material.dart';
 
 class EmailVerificationStaffScreen extends StatelessWidget {
+  final TextEditingController codeController = TextEditingController();
+
+  void continueButtonPressed(BuildContext context) {
+    // Get user input from controllers
+
+    String code = codeController.text;
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+      content: Text(code),
+      ),
+    );
+
+    // Navigate to the email verification screen
+    Navigator.pushNamed(context, '/personalDetails');
+  }
+  @override
+  void dispose() {
+    codeController.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +83,7 @@ class EmailVerificationStaffScreen extends StatelessWidget {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/personalDetails');
+                    continueButtonPressed(context);
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min, // Use only the minimum space needed

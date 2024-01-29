@@ -8,7 +8,7 @@ class JoinAsRoleScreen extends StatefulWidget {
 }
 
 class _JoinAsRoleScreenState extends State<JoinAsRoleScreen> {
-  Role? _selectedRole;
+  Role? _selectedRole = Role.client;
 
   void _onContinuePressed() {
     if (_selectedRole == Role.client) {

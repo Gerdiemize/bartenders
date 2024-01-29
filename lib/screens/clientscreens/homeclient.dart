@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:bartenders_and_more/screens/clientscreens/partyDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:bartenders_and_more/widgets/clientside/homewidgets.dart';
 
@@ -11,6 +14,33 @@ class _HomeClientScreenState extends State<HomeClientScreen> {
   double pricePerBartender = 120;
   String selectedPartyType = 'House';
   List<Map<String, dynamic>> selectedServices = [];
+
+  void proceedButtonPressed(BuildContext context) {
+    // Initialize a Map to store counts for each service
+    Map<String, int> serviceCounts = {};
+
+    if ( selectedServices.isNotEmpty){
+      for (var service in selectedServices) {
+        String serviceType = service["service"];
+        int count = service["count"];
+
+        // Update the count for the service type
+        serviceCounts[serviceType] = (serviceCounts[serviceType] ?? 0) + count;
+      }
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+        content: Text(selectedPartyType+serviceCounts.toString()),
+        ),
+      );
+      //Navigator.pushNamed(context, '/partyDetails');
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+        content: Text("Please select a party type and the required services for your event."),
+        ),
+      );
+    }
+  }
 
   void updateSelectedServices(String service, double price, IconData iconDisp) {
   // Here you would add logic to update the selectedServices list based on user actions
@@ -227,7 +257,7 @@ void subtractServiceCount(String serviceLabel) {
             ),
             child: ElevatedButton(
               onPressed: () {
-                 Navigator.pushNamed(context, '/partyDetails');
+                  proceedButtonPressed(context);
                 },
                 child: Row(
                   mainAxisSize: MainAxisSize.min, // Use only the minimum space needed

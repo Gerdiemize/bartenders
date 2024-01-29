@@ -52,7 +52,7 @@ class ServicesGrid extends StatefulWidget {
 
 class _ServicesGridState extends State<ServicesGrid> {
   final List<Map<String, dynamic>> services = [
-    {'icon': Icons.local_bar, 'label': 'Bartender', 'isSelected': true},
+    {'icon': Icons.local_bar, 'label': 'Bartender', 'isSelected': false},
     {'icon': Icons.restaurant, 'label': 'Server', 'isSelected': false},
     {'icon': Icons.kitchen, 'label': 'Chef', 'isSelected': false},
     {'icon': Icons.music_note, 'label': 'DJ', 'isSelected': false},

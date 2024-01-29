@@ -3,7 +3,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
+  final TextEditingController emailController = TextEditingController();
+
+  void sendVerificationButtonPressed(BuildContext context) {
+    // Get user input from controllers
+
+    String email = emailController.text;
+
+    if (isValidEmail(email)){
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(email),
+        ),
+      );
+      Navigator.pushNamed(context, '/emailVerificationForgotPassword');
+    }else{
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("$email is a not valid email address."),
+        ),
+      );
+    }
+    
+  }
+
+  bool isValidEmail(String email) {
+    // Regular expression for a basic email validation
+    final emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+
+    return emailRegex.hasMatch(email);
+  }
+
   @override
+  void dispose() {
+    emailController.dispose();
+  }
   Widget build(BuildContext context) {
     return Scaffold(
     appBar: AppBar(
@@ -40,6 +74,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           ),
           SizedBox(height: 8),
           TextField(
+            controller: emailController,
             style: TextStyle(color: Colors.white),
             decoration: InputDecoration(
               hintText: 'Enter your email',
@@ -70,7 +105,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/emailVerificationForgotPassword');
+                    sendVerificationButtonPressed(context);
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min, // Use only the minimum space needed

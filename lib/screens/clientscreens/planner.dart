@@ -68,7 +68,12 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
               return EventPlannerCard(); // Replace with your event card data
             },
           ),
-          Center(child: Text('Previous Events Content', style: TextStyle(color: Colors.white))),
+          ListView.builder(
+            itemCount: 10, // Replace with your actual data length
+            itemBuilder: (BuildContext context, int index) {
+              return EventPlannerCard(); // Replace with your event card data
+            },
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

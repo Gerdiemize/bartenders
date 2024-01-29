@@ -1,7 +1,89 @@
 import 'package:flutter/material.dart';
 
 class CreateNewPassword extends StatelessWidget {
+  final TextEditingController repeatPasswordController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  void resetPasswordButtonPressed(BuildContext context) {
+    // Get user input from controllers
+
+    String repeatPassword = repeatPasswordController.text;
+    String password = passwordController.text;
+    if (password == repeatPassword) {
+      if (password.length >= 8 && repeatPassword.length >= 8){
+        if (isPasswordComplex(password) && isPasswordComplex(repeatPassword)){
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+          content: Text("$password and $repeatPassword are equal and longer than 8 characters"),
+          ),
+        );
+        }else{
+          ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+          content: Text("$password and $repeatPassword don't complete the complexity requirements."),
+          ),
+        );
+        }
+      }else{
+        ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+        content: Text("$password and $repeatPassword are less than 8 characters."),
+        ),
+      );
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+        content: Text("$password and $repeatPassword don't match."),
+        ),
+      );
+    }
+    
+
+    // Navigate to the email verification screen
+    //Navigator.pushNamed(context, '/emailVerification');
+  }
+
+  bool isPasswordComplex(String password) {
+    // Minimum length requirement
+    if (password.length < 8) {
+      print("Password must be at least 8 characters long.");
+      return false;
+    }
+
+    // Check for uppercase letters
+    if (!password.contains(RegExp(r'[A-Z]'))) {
+      print("Password must contain at least one uppercase letter.");
+      return false;
+    }
+
+    // Check for lowercase letters
+    if (!password.contains(RegExp(r'[a-z]'))) {
+      print("Password must contain at least one lowercase letter.");
+      return false;
+    }
+
+    // Check for numbers
+    if (!password.contains(RegExp(r'[0-9]'))) {
+      print("Password must contain at least one number.");
+      return false;
+    }
+
+    // Check for special characters
+    if (!password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+      print("Password must contain at least one special character.");
+      return false;
+    }
+
+    // If all criteria are met, the password is considered complex
+    return true;
+}
   @override
+  void dispose() {
+    repeatPasswordController.dispose();
+    passwordController.dispose();
+  }
+  
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
@@ -31,6 +113,7 @@ class CreateNewPassword extends StatelessWidget {
               ),
               SizedBox(height: 10),
               TextField(
+                controller: passwordController,
                 obscureText: true,
                 style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
@@ -57,6 +140,7 @@ class CreateNewPassword extends StatelessWidget {
               ),
               SizedBox(height: 10),
               TextField(
+                controller: repeatPasswordController,
                 obscureText: true,
                 style: TextStyle(color: Colors.white),
                 decoration: InputDecoration(
@@ -94,6 +178,7 @@ class CreateNewPassword extends StatelessWidget {
                 ),
                 child: ElevatedButton(
                   onPressed: () {
+                    resetPasswordButtonPressed(context);
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min, // Use only the minimum space needed
