@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bartenders_and_more/widgets/progressbar.dart';
 
 class TermsConditionsClientScreen extends StatelessWidget {
   @override
@@ -7,13 +8,20 @@ class TermsConditionsClientScreen extends StatelessWidget {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text('Terms and Conditions'),
+        title: Text('Terms and Conditions',style: TextStyle(color: Colors.white),),
         centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
+            StepProgressBar(
+              totalSteps: 8,
+              currentStep: 4,
+              title: 'Looking to hire', // Add the title text
+              ),
+            SizedBox(height: 20),
             Text(
               'Last updated December 2023',
               style: TextStyle(color: Colors.white, fontSize: 14),

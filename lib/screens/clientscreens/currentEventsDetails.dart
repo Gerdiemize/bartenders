@@ -27,7 +27,8 @@ class _CurrentEventDetails extends State<CurrentEventDetails> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text('Current Events'),
+        title: Text('Current Events',style: TextStyle(color: Colors.white),),
+        iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Colors.black,
         actions: <Widget>[
           IconButton(

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:bartenders_and_more/utilities.dart';
+import 'package:bartenders_and_more/widgets/progressbar.dart';
 
 class PersonalDetailsScreen extends StatefulWidget {
   @override
@@ -35,7 +36,13 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              SizedBox(height: 50),
+              SizedBox(height: 50,),
+              StepProgressBar(
+              totalSteps: 8,
+              currentStep: 3,
+              title: 'Looking for job', // Add the title text
+              ),
+              SizedBox(height: 30),
               Text(
                 'Add Your Personal Details',
                 style: TextStyle(color: Colors.white, fontSize: 28),

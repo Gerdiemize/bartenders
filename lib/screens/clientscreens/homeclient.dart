@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:bartenders_and_more/screens/clientscreens/partyDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:bartenders_and_more/widgets/clientside/homewidgets.dart';
+import 'package:bartenders_and_more/widgets/progressbar.dart';
 
 class HomeClientScreen extends StatefulWidget {
   @override
@@ -32,7 +33,7 @@ class _HomeClientScreenState extends State<HomeClientScreen> {
         content: Text(selectedPartyType+serviceCounts.toString()),
         ),
       );
-      //Navigator.pushNamed(context, '/partyDetails');
+      Navigator.pushNamed(context, '/partyDetails');
     }else{
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -42,7 +43,7 @@ class _HomeClientScreenState extends State<HomeClientScreen> {
     }
   }
 
-  void updateSelectedServices(String service, double price, IconData iconDisp) {
+  void updateSelectedServices(String service, double price, String iconDisp) {
   // Here you would add logic to update the selectedServices list based on user actions
   setState(() {
     selectedServices.add({
@@ -92,9 +93,10 @@ void subtractServiceCount(String serviceLabel) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text('Quote', style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.black,
         centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.white),
         actions: <Widget>[
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
@@ -116,6 +118,12 @@ void subtractServiceCount(String serviceLabel) {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              StepProgressBar(
+              totalSteps: 8,
+              currentStep: 5,
+              title: 'Looking to hire', // Add the title text
+              ),
+              SizedBox(height: 10,),
               Text(
                 'Party Type',
                 style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
@@ -132,7 +140,7 @@ void subtractServiceCount(String serviceLabel) {
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
                   PartyTypeCard(
-                    icon: Icons.house,
+                    iconAsset: 'assets/partyIcons/house.svg',
                     label: 'House',
                     isSelected: selectedPartyType == 'House',
                     onSelect: () {
@@ -142,7 +150,7 @@ void subtractServiceCount(String serviceLabel) {
                     },
                   ),
                   PartyTypeCard(
-                    icon: Icons.favorite,
+                    iconAsset: 'assets/partyIcons/wedding.svg',
                     label: 'Wedding',
                     isSelected: selectedPartyType == 'Wedding',
                     onSelect: () {
@@ -152,7 +160,7 @@ void subtractServiceCount(String serviceLabel) {
                     },
                   ),
                   PartyTypeCard(
-                    icon: Icons.business,
+                    iconAsset: 'assets/partyIcons/corporate.svg',
                     label: 'Corporate',
                     isSelected: selectedPartyType == 'Corporate',
                     onSelect: () {
@@ -162,7 +170,7 @@ void subtractServiceCount(String serviceLabel) {
                     },
                   ),
                   PartyTypeCard(
-                    icon: Icons.business,
+                    iconAsset: 'assets/partyIcons/baby.svg',
                     label: 'Corporate',
                     isSelected: selectedPartyType == 'Corporate',
                     onSelect: () {
@@ -172,7 +180,7 @@ void subtractServiceCount(String serviceLabel) {
                     },
                   ),
                   PartyTypeCard(
-                    icon: Icons.business,
+                    iconAsset: 'assets/partyIcons/bachelor.svg',
                     label: 'Corporate',
                     isSelected: selectedPartyType == 'Corporate',
                     onSelect: () {

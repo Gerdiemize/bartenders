@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bartenders_and_more/utilities.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:bartenders_and_more/widgets/progressbar.dart';
 
 class SignUpStaffScreen extends StatelessWidget {
   final TextEditingController firstNameController = TextEditingController();
@@ -116,7 +116,13 @@ class SignUpStaffScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              SizedBox(height: 100),
+              SizedBox(height: 50,),
+              StepProgressBar(
+              totalSteps: 8,
+              currentStep: 2,
+              title: 'Looking for job', // Add the title text
+              ),
+              SizedBox(height: 50),
               Text(
                 'Join Our Talent Network',
                 style: TextStyle(color: Colors.white, fontSize: 28),

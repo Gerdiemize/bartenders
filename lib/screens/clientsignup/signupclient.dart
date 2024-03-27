@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:bartenders_and_more/utilities.dart';
+import 'package:bartenders_and_more/widgets/progressbar.dart';
 
 class SignUpClientScreen extends StatelessWidget {
   final TextEditingController firstNameController = TextEditingController();
@@ -114,7 +115,13 @@ class SignUpClientScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              SizedBox(height: 100),
+              SizedBox(height: 50),
+              StepProgressBar(
+              totalSteps: 8,
+              currentStep: 2,
+              title: 'Looking to hire', // Add the title text
+              ),
+              SizedBox(height: 20),
               Text(
                 'Create Your Account',
                 style: TextStyle(color: Colors.white, fontSize: 28),

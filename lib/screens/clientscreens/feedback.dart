@@ -6,7 +6,8 @@ class FeedbackClientScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text('Feedback'),
+        title: Text('Feedback',style: TextStyle(color: Colors.white),),
+        iconTheme: IconThemeData(color: Colors.white),
         actions: [
           TextButton(
             onPressed: () {

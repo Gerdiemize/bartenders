@@ -74,12 +74,28 @@ flutter:
     - assets/images/walkthrough1.png
     - assets/images/walkthrough2.png
     - assets/images/walkthrough3.png
+    - assets/images/membership.png
     - assets/apple_logo.svg
     - assets/google_logo.svg
     - assets/avatarPlaceholder.png
     - assets/images/dashboardHomeImage.png
     - assets/images/teamImage.png
     - assets/images/girlSearchResult.png
+    - assets/partyIcons/wedding.svg
+    - assets/partyIcons/house.svg
+    - assets/partyIcons/anniversary.svg
+    - assets/partyIcons/baby.svg
+    - assets/partyIcons/bachelor.svg
+    - assets/partyIcons/birthday.svg
+    - assets/partyIcons/corporate.svg
+    - assets/serviceIcons/bartender.svg
+    - assets/serviceIcons/chef.svg
+    - assets/serviceIcons/dj.svg
+    - assets/serviceIcons/eventPlanner.svg
+    - assets/serviceIcons/server.svg
+    - assets/serviceIcons/security.svg
+    - assets/serviceIcons/host.svg
+    - assets/serviceIcons/clean-up.svg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

@@ -78,10 +78,10 @@ class _DashboardClientState extends State<DashboardClient> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text('Welcome, Jonathan'),
+        title: Text('Welcome, Jonathan', style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.black,
         centerTitle: true,
-        leading: Icon(CupertinoIcons.line_horizontal_3), // For the menu icon
+        leading: Icon(CupertinoIcons.line_horizontal_3, color: Colors.white,), // For the menu icon
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.only(bottom: 80.0), // Bottom padding for the fixed button
@@ -237,7 +237,7 @@ class _DashboardClientState extends State<DashboardClient> {
                     ],
                   ),
                   Container(
-                    height: 170, // Adjust the height to fit the event card
+                    height: 175, // Adjust the height to fit the event card
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: currentEvents.length,

@@ -42,8 +42,9 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text('Planner'),
+        title: Text('Planner',style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.black,
+        iconTheme: IconThemeData(color: Colors.white),
         bottom: TabBar(
           controller: _tabController,
           indicator: GradientTabIndicator(

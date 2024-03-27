@@ -206,67 +206,76 @@ class SearchResultCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.grey.shade800),
-      ),
-      margin: EdgeInsets.all(8.0),
-      child: IntrinsicHeight(
-        child: Row(
-          children: [
-            Expanded(
-              flex: 2,
-              child: ClipRRect(
-                borderRadius: BorderRadius.horizontal(left: Radius.circular(12)),
-                child: Image.asset(
-                  imagePath,
-                  fit: BoxFit.cover,
-                  height: 180, // Reduced height for the card
+    return Stack(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.grey.shade800),
+          ),
+          margin: EdgeInsets.all(8.0),
+          child: IntrinsicHeight(
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.horizontal(left: Radius.circular(12)),
+                    child: Image.asset(
+                      imagePath,
+                      fit: BoxFit.cover,
+                      height: 180, // Reduced height for the card
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            Expanded(
-              flex: 3,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Row(
+                Expanded(
+                  flex: 3,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Expanded(
-                          child: Text(
-                            vendorName,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18, // Adjusted font size
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                vendorName,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18, // Adjusted font size
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                            Icon(Icons.star, color: Colors.amber, size: 18),
+                            SizedBox(width: 4),
+                            Text(
+                              '$rating',
+                              style: TextStyle(color: Colors.white, fontSize: 16), // Adjusted font size
+                            ),
+                          ],
                         ),
-                        Icon(Icons.star, color: Colors.amber, size: 18),
-                        SizedBox(width: 4),
-                        Text(
-                          '$rating',
-                          style: TextStyle(color: Colors.white, fontSize: 16), // Adjusted font size
-                        ),
+                        SizedBox(height: 4),
+                        infoRow(Icons.school, experience),
+                        infoRow(Icons.location_on, location),
+                        infoRow(Icons.attach_money, price),
                       ],
                     ),
-                    SizedBox(height: 4),
-                    infoRow(Icons.school, experience),
-                    infoRow(Icons.location_on, location),
-                    infoRow(Icons.attach_money, price),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
+        Positioned(
+          top: 50, // Adjust the positioning as per your UI design
+          right: 15, // Adjust the positioning as per your UI design
+          child: matchPercentageIndicator(84),
+        ),
+      ],
     );
   }
 
@@ -283,6 +292,34 @@ class SearchResultCard extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget matchPercentageIndicator(double percentage) {
+    return Container(
+      width: 36, // Adjust the size as needed
+      height: 36, // Adjust the size as needed
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          CircularProgressIndicator(
+            value: percentage / 100, // Convert the percentage to a value between 0 and 1
+            backgroundColor: Colors.grey,
+            color: Colors.green,
+            strokeWidth: 6, // Adjust the stroke width as needed
+          ),
+          Center(
+            child: Text(
+              '${percentage.toInt()}%',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 12, // Adjust the font size as needed
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

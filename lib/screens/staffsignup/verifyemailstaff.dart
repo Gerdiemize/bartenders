@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bartenders_and_more/widgets/progressbar.dart';
 
 class EmailVerificationStaffScreen extends StatelessWidget {
   final TextEditingController codeController = TextEditingController();
@@ -29,8 +30,15 @@ class EmailVerificationStaffScreen extends StatelessWidget {
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            SizedBox(height: 50,),
+              StepProgressBar(
+              totalSteps: 8,
+              currentStep: 2,
+              title: 'Looking for job', // Add the title text
+              ),
+            SizedBox(height: 150,),
             Text(
               'Verify your email',
               style: TextStyle(color: Colors.white, fontSize: 28),

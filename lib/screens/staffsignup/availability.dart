@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bartenders_and_more/widgets/progressbar.dart';
 
 class AvailabilityScreen extends StatelessWidget {
   @override
@@ -12,7 +13,13 @@ class AvailabilityScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              SizedBox(height: 50),
+              SizedBox(height: 50,),
+              StepProgressBar(
+              totalSteps: 8,
+              currentStep: 4,
+              title: 'Looking for job', // Add the title text
+              ),
+              SizedBox(height: 30),
               Text(
                 'Your Availability',
                 style: TextStyle(color: Colors.white, fontSize: 28),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart'; // For iOS-style icons
+import 'package:bartenders_and_more/widgets/progressbar.dart';
 
 class PreviewPartyDetailsPage extends StatelessWidget {
   @override
@@ -7,10 +8,10 @@ class PreviewPartyDetailsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text('Preview Party Details'),
+        title: Text('Preview Party Details', style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.black,
         centerTitle: true,
-        leading: Icon(CupertinoIcons.line_horizontal_3), // For the menu icon
+        iconTheme: IconThemeData(color: Colors.white),// For the menu icon
       ),
       body: Stack(
         children: [
@@ -19,6 +20,12 @@ class PreviewPartyDetailsPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start, // Align titles to the left
               children: [
+                StepProgressBar(
+                  totalSteps: 8,
+                  currentStep: 7,
+                  title: 'Looking to hire', // Add the title text
+                ),
+                SizedBox(height: 10,),
                 Text(
                   'Event date & Start time',
                   style: TextStyle(color: Colors.white, fontSize: 16),

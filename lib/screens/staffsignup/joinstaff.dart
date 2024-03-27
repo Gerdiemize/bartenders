@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:bartenders_and_more/widgets/progressbar.dart';
 
 class LocationScreenStaff extends StatelessWidget {
   final TextEditingController locationController = TextEditingController();
@@ -31,7 +32,13 @@ class LocationScreenStaff extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              SizedBox(height: 150),
+              SizedBox(height: 50,),
+              StepProgressBar(
+              totalSteps: 8,
+              currentStep: 1,
+              title: 'Looking for job', // Add the title text
+              ),
+              SizedBox(height: 120),
               Text(
                 'Your Location',
                 style: TextStyle(color: Colors.white, fontSize: 28),

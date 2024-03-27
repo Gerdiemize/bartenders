@@ -39,7 +39,8 @@ class _ProfileHireScreenState extends State<ProfileHireScreen> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text('Miriane Piers'),
+        title: Text('Miriane Piers',style: TextStyle(color: Colors.white),),
+        iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Colors.black,
         actions: <Widget>[
           IconButton(

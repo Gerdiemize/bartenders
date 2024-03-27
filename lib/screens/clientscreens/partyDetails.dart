@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:bartenders_and_more/widgets/progressbar.dart';
 
 class PartyDetailsPage extends StatefulWidget {
   @override
@@ -49,9 +50,10 @@ class _PartyDetailsPageState extends State<PartyDetailsPage> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text('Party Details'),
+        title: Text('Party Details', style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.black,
         centerTitle: true,
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -61,6 +63,11 @@ class _PartyDetailsPageState extends State<PartyDetailsPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                StepProgressBar(
+                  totalSteps: 8,
+                  currentStep: 6,
+                  title: 'Looking to hire', // Add the title text
+                  ),
                 SizedBox(height: 10),
                 Text(
                   'Event Date',

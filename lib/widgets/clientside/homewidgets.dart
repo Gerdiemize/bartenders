@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class PartyTypeCard extends StatelessWidget {
-  final IconData icon;
+  final String iconAsset; // Now it should be the path to the SVG asset
   final String label;
   final bool isSelected;
   final VoidCallback onSelect;
 
   const PartyTypeCard({
     Key? key,
-    required this.icon,
+    required this.iconAsset, // Change this
     required this.label,
     required this.isSelected,
     required this.onSelect,
@@ -25,13 +26,16 @@ class PartyTypeCard extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(color: isSelected ? const Color.fromARGB(255, 252, 207, 72) : Colors.grey),
           borderRadius: BorderRadius.circular(8), // Match to your design
-          // Gradient border when selected
-          
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(icon, size: 40, color: Colors.white), // Icon size and color can be adjusted
+            SvgPicture.asset(
+              iconAsset,
+              color: Colors.white,
+              width: 40, // Set your SVG icon size here
+              height: 40, // Set your SVG icon size here
+            ),
             Text(label, style: TextStyle(color: Colors.white)),
           ],
         ),
@@ -41,8 +45,9 @@ class PartyTypeCard extends StatelessWidget {
 }
 
 
+
 class ServicesGrid extends StatefulWidget {
-  final Function(String, double, IconData) updateSelectedServices;
+  final Function(String, double, String) updateSelectedServices;
   final Function(String) removeServ;
 
   ServicesGrid({Key? key, required this.updateSelectedServices, required this.removeServ}) : super(key: key);
@@ -52,14 +57,14 @@ class ServicesGrid extends StatefulWidget {
 
 class _ServicesGridState extends State<ServicesGrid> {
   final List<Map<String, dynamic>> services = [
-    {'icon': Icons.local_bar, 'label': 'Bartender', 'isSelected': false},
-    {'icon': Icons.restaurant, 'label': 'Server', 'isSelected': false},
-    {'icon': Icons.kitchen, 'label': 'Chef', 'isSelected': false},
-    {'icon': Icons.music_note, 'label': 'DJ', 'isSelected': false},
-    {'icon': Icons.event, 'label': 'Planner', 'isSelected': false},
-    {'icon': Icons.security, 'label': 'Security', 'isSelected': false},
-    {'icon': Icons.star, 'label': 'Host', 'isSelected': false},
-    {'icon': Icons.cleaning_services, 'label': 'Clean-up', 'isSelected': false},
+    {'icon': 'assets/serviceIcons/bartender.svg', 'label': 'Bartender', 'isSelected': false},
+    {'icon': 'assets/serviceIcons/server.svg', 'label': 'Server', 'isSelected': false},
+    {'icon': 'assets/serviceIcons/chef.svg', 'label': 'Chef', 'isSelected': false},
+    {'icon': 'assets/serviceIcons/dj.svg', 'label': 'DJ', 'isSelected': false},
+    {'icon': 'assets/serviceIcons/eventPlanner.svg', 'label': 'Planner', 'isSelected': false},
+    {'icon': 'assets/serviceIcons/security.svg', 'label': 'Security', 'isSelected': false},
+    {'icon': 'assets/serviceIcons/host.svg', 'label': 'Host', 'isSelected': false},
+    {'icon': 'assets/serviceIcons/clean-up.svg', 'label': 'Clean-up', 'isSelected': false},
   ];
 
   @override
@@ -74,6 +79,8 @@ class _ServicesGridState extends State<ServicesGrid> {
       itemCount: services.length,
       itemBuilder: (context, index) {
         final service = services[index];
+        final iconPath = service['icon'];
+        print(iconPath);
         return GestureDetector(
           onTap: () {
             setState(() {
@@ -91,7 +98,12 @@ class _ServicesGridState extends State<ServicesGrid> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(service['icon'], color: Colors.white),
+                SvgPicture.asset(
+                  iconPath, // Use the SVG asset path
+                  color: Colors.white,
+                  width: 36, // Adjust the size accordingly
+                  height: 36, // Adjust the size accordingly
+                ),
                 Text(
                   service['label'],
                   style: TextStyle(color: Colors.white),
@@ -107,7 +119,7 @@ class _ServicesGridState extends State<ServicesGrid> {
 
 class ServiceEstimateCard extends StatelessWidget {
   final String service;
-  final IconData iconServ;
+  final String iconServ;
   final int count;
   final double price;
   final VoidCallback onAdd;
@@ -135,7 +147,12 @@ class ServiceEstimateCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Icon(iconServ, color: Colors.white), // Replace with appropriate icon
+            SvgPicture.asset(
+              iconServ, // Use the SVG asset path
+              color: Colors.white,
+              width: 36, // Adjust the size accordingly
+              height: 36, // Adjust the size accordingly
+            ),
             SizedBox(width: 8),
             Expanded(
               child: Text(
